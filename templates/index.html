@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PHOT🔥</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <link href="https://cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet">
+</head>
+<body>
+  <button id="theme-toggle" title="Dark mode on/off">🌙</button>
+
+  <div class="mui-container">
+    <h1 class="mui--text-center">PHOT🔥 - A Python Heating Oil Tracker</h1>
+
+    <div class="mui-panel">
+      <h3>Neuen Füllstand erfassen</h3>
+      <form id="create-form" class="mui-form">
+        <div class="mui-textfield">
+          <input type="text" name="fuel_level" placeholder="Füllstand in cm (78.0)">
+        </div>
+        <div class="mui-textfield">
+          <input type="date" name="measured_on" required>
+          <label>Abgelesen am</label>
+        </div>
+        <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">Speichern</button>
+      </form>
+    </div>
+
+    <div class="mui-panel">
+      <h3>Alle Füllstände</h3>
+      <button id="load" class="mui-btn mui-btn--primary">Laden</button>
+      <table class="mui-table">
+        <thead>
+          <tr><th>ID</th><th>Füllstand in cm</th><th>Erfassungsdatum</th><th>Aktionen</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="mui-panel">
+      <h3>Füllstand über Zeit</h3>
+      <canvas id="fuelChart"></canvas>
+    </div>
+
+    <div class="mui-panel" id="edit-section" style="display:none;">
+      <h3>Bearbeiten</h3>
+      <form id="edit-form" class="mui-form">
+        <input type="hidden" name="id">
+        <div class="mui-textfield">
+          <input type="text" name="fuel_level">
+        </div>
+        <div class="mui-textfield">
+          <input type="date" name="measured_on" required>
+          <label>Measured On</label>
+        </div>
+        <button type="submit" class="mui-btn mui-btn--raised mui-btn--accent">Aktualisieren</button>
+        <button type="button" id="cancel-edit" class="mui-btn">Abbrechen</button>
+      </form>
+    </div>
+  </div>
+<script src="{{ url_for('static', path='/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
