@@ -23,12 +23,25 @@
 
 ---
 
-## 🚀 Installation & Setup
+## 🚀 Setup
+https://hub.docker.com/r/florianalt/phot
 
-### 1. Repository klonen
+### Docker Run
 
 ```bash
-git clone https://github.com/AltFlorian/PHOT.git
-cd PHOT
+docker run -d -v /code/app/storage:/phot/ --name florianalt/phot:latest -p 8080:80 phot 
 ```
-...work in progress
+
+### Docker Compose
+```bash
+name: phot
+services:
+    phot:
+        volumes:
+            - /code/app/storage:/phot/
+        container_name: florianalt/phot:latest
+        ports:
+            - 8080:80
+        image: phot
+```
+
