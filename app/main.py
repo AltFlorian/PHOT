@@ -7,6 +7,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from pydantic_settings import BaseSettings
+import os
+from pathlib import Path
 
 class Settings(BaseSettings):
     height: float = 185.0
@@ -30,8 +32,9 @@ class TankLevelUpdate(TankLevelBase):
     fuel_level: Union[Decimal, None] = None
     measured_on: Union[str, None] = None
 
+script_dir = os.path.dirname(__file__)
 sqlite_file_name = "database.db"
-sqlite_url = f"sqlite:///storage///{sqlite_file_name}"
+sqlite_url = f"sqlite:///{script_dir}///storage///{sqlite_file_name}"
 
 connect_args = {"check_same_thread": False}
 engine = create_engine(sqlite_url, connect_args=connect_args)
@@ -47,8 +50,10 @@ SessionDep = Annotated[Session, Depends(get_session)]
 settings = Settings()
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+st_abs_file_path = os.path.join(script_dir, "static/")
+app.mount("/static", StaticFiles(directory=st_abs_file_path), name="static")
+BASE_DIR = Path(__file__).resolve().parent
+templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 @app.on_event("startup")
 def on_startup():
