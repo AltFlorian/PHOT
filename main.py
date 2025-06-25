@@ -9,8 +9,7 @@ from fastapi.responses import HTMLResponse
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    height: float = 200.0
-    max_capacity: int = 4000
+    height: float = 185.0
 
 class TankLevelBase(SQLModel):
     fuel_level: Decimal = Field(default=0, max_digits=4, decimal_places=1)
@@ -103,5 +102,5 @@ def delete_tanklevel(tanklevel_id: int, session: SessionDep):
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse(
-        request=request, name="index.html", context={"max_tank_height": settings.height, "max_tank_capacity": settings.max_capacity}
+        request=request, name="index.html", context={"max_tank_height": settings.height}
     )

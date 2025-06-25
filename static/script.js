@@ -1,5 +1,5 @@
 const API = '/api/v1/tanklevels';
-const maxFuelLevel = 200.0;
+const maxFuelLevel = 185.0;
 
 // Darkmode Umschalter
 const themeToggle = document.getElementById('theme-toggle');
