@@ -2,6 +2,8 @@
 
 **PHOT** steht für _Python Heating Oil Tracker_ – eine moderne Webanwendung, mit der du einfach und komfortabel den Füllstand deines Heizöltanks überwachen kannst.
 
+https://github.com/user-attachments/assets/3217d66b-4dce-4c4b-ada5-93dcf0a994e5
+
 ---
 
 ## 🌟 Features
