@@ -2,6 +2,8 @@
 
 **PHOT** steht für _Python Heating Oil Tracker_ – eine moderne Webanwendung, mit der du einfach und komfortabel den Füllstand deines Heizöltanks überwachen kannst.
 
+https://github.com/user-attachments/assets/3217d66b-4dce-4c4b-ada5-93dcf0a994e5
+
 ---
 
 ## 🌟 Features
@@ -23,12 +25,25 @@
 
 ---
 
-## 🚀 Installation & Setup
+## 🚀 Setup
+https://hub.docker.com/r/florianalt/phot
 
-### 1. Repository klonen
+### Docker Run
 
 ```bash
-git clone https://github.com/AltFlorian/PHOT.git
-cd PHOT
+docker run -d -v /code/app/storage:/phot/ --name florianalt/phot:latest -p 8080:80 phot 
 ```
-...work in progress
+
+### Docker Compose
+```bash
+name: phot
+services:
+    phot:
+        volumes:
+            - /code/app/storage:/phot/
+        container_name: florianalt/phot:latest
+        ports:
+            - 8080:80
+        image: phot
+```
+
