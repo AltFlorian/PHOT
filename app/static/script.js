@@ -16,10 +16,18 @@ themeToggle.addEventListener('click', () => {
 
 // Daten laden und anzeigen
 async function loadAll() {
-  const data = await (await fetch(API + '/?offset=0&limit=100')).json();
+  const data = await (await fetch(API + '/?offset=0&limit=1000')).json();
+
+  // Kopie für die Tabelle erstellen
+  const tableData = [...data];
+
+  // Tabelle: neueste zuerst (höchste ID zuerst)
+  tableData.sort((a, b) => b.id - a.id);
+
   const tbody = document.querySelector('tbody');
   tbody.innerHTML = '';
-  data.forEach(t => {
+
+  tableData.forEach(t => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>${t.id}</td>
@@ -31,8 +39,11 @@ async function loadAll() {
       </td>`;
     tbody.appendChild(tr);
   });
+
+  // Chart: unveränderte Reihenfolge (chronologisch)
   updateChart(data);
 }
+
 
 // Chart.js aktualisieren
 function updateChart(data) {

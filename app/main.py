@@ -71,7 +71,7 @@ def create_tanklevel(tanklevel: TankLevelCreate, session: SessionDep):
 def read_tanklevels(
     session: SessionDep,
     offset: int = 0,
-    limit: Annotated[int, Query(le=100)] = 100,
+    limit: Annotated[int, Query(le=1000)] = 1000,
 ):
     tanklevels = session.exec(select(TankLevel).offset(offset).limit(limit)).all()
     return tanklevels
